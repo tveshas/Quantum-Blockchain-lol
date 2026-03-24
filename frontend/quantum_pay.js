@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://quantum-blockchain-lol.onrender.com";
 let ledgerChainCache = [];
 
 function sleep(ms) {
@@ -491,7 +491,7 @@ function initLedgerTab() {
 
 // ── QHF Explorer tab ──────────────────────────────────────
 
-const QB_API = "http://127.0.0.1:8000";
+const QB_API = "https://quantum-blockchain-lol.onrender.com";
 
 async function runQhfHash() {
     const message = document.getElementById("qhf-message").value.trim();
