@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumPay</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="global-error" class="global-error" style="display:none;"></div>
+
+<header class="header">
+    <div class="header-top">
+        <div class="logo-icon">🛡</div>
+        <h1>Quantum<span>Pay</span></h1>
+    </div>
+    <p class="subtitle">Quantum-Safe Payment Integrity via Quantum Walk Hash Functions</p>
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="send">Send Payment</button>
+        <button class="tab-btn" data-tab="ledger">Payment Ledger</button>
+        <button class="tab-btn" data-tab="qhf">QHF Explorer</button>
+        <button class="tab-btn" data-tab="how">How It Works</button>
+
+    </nav>
+</header>
+
+<main class="main">
+
+    <section id="tab-send" class="tab-content active">
+        <div class="send-card">
+            <h2>New Quantum-Safe UPI Payment</h2>
+            <p class="qb-subtext">Payment integrity secured by Quantum Walk Hash Function</p>
+
+            <div class="field-group">
+                <label>Sender name</label>
+                <input id="send-sender" class="qb-input" type="text" placeholder="e.g. Arjun Sharma" autocomplete="off">
+            </div>
+            <div class="field-group">
+                <label>Receiver</label>
+                <input id="send-receiver" class="qb-input" type="text" placeholder="e.g. HDFC Merchant — A/C 9876" autocomplete="off">
+            </div>
+            <div class="field-group">
+                <label>Amount</label>
+                <input id="send-amount" class="qb-input" type="text" placeholder="e.g. ₹50,000" autocomplete="off">
+            </div>
+            <div class="field-group">
+                <label>Note</label>
+                <input id="send-note" class="qb-input" type="text" placeholder="e.g. Festival Shopping" autocomplete="off">
+            </div>
+
+            <button type="button" class="btn btn-quantum btn-block mt-16" id="send-btn">Send Payment</button>
+            <div id="send-flow" class="send-flow"></div>
+            <button type="button" class="btn btn-primary btn-block mt-16" id="send-another" style="display:none;">Send Another Payment</button>
+        </div>
+    </section>
+
+    <section id="tab-ledger" class="tab-content">
+        <h2 class="ledger-heading">Quantum Payment Chain</h2>
+        <div id="ledger-chain" class="ledger-chain"></div>
+
+        <h2 class="ledger-heading mt-32">Chain Verification</h2>
+        <div class="btn-row verify-btns">
+            <button type="button" class="btn btn-quantum" id="btn-verify-chain">Verify Chain</button>
+            <button type="button" class="btn btn-attack" id="btn-simulate-attack">Simulate Attack</button>
+            <button type="button" class="btn btn-primary" id="btn-reset-chain">Reset Chain</button>
+        </div>
+        <div id="attack-status" class="attack-status"></div>
+        <div id="verify-output" class="verify-output">
+            <p class="text-dim">Run verification or open this tab to load the chain.</p>
+        </div>
+        <div id="attack-banner"></div>
+    </section>
+
+    <section id="tab-how" class="tab-content">
+        <div class="how-section">
+            <h2>⚠️ The Threat to Payment Systems</h2>
+            <div class="how-two-col">
+                <div class="how-col">
+                    <h3>Today (SHA-256 Protected)</h3>
+                    <p>UPI, NEFT, and IMPS transactions are secured using SHA-256 hash functions. Each payment generates a unique fingerprint. Any tampering changes the fingerprint and is detected.</p>
+                    <p class="text-green">✅ Safe today</p>
+                    <p class="text-red">❌ Broken by quantum computers running Grover's Algorithm — effective security halved from 256-bit to 128-bit</p>
+                </div>
+                <div class="how-col">
+                    <h3>Quantum Era Threat</h3>
+                    <p>A sufficiently powerful quantum computer can find SHA-256 collisions — two different payment amounts that produce the same hash. An attacker could modify ₹12,499 to ₹1,24,990 and produce a matching hash, making the tamper invisible to the payment gateway.</p>
+                    <p class="text-red">🚨 Payment fraud becomes undetectable</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="how-section mt-32">
+            <h2>⚛️ How Quantum Walk Hash Functions Work</h2>
+            <div class="flow-row">
+                <div class="flow-box">
+                    <strong>Payment Data</strong>
+                    <p>Sender + Receiver + Amount + Time</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-box">
+                    <strong>Convert to Bits</strong>
+                    <p>Each character → 8-bit ASCII<br>₹12,499 → 0011100101...</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-box">
+                    <strong>Run Quantum Walk</strong>
+                    <p>Walker evolves on 8×8 grid<br>Each bit steers the walk<br>U0 for '0', U1 for '1'</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-box">
+                    <strong>Probability Matrix</strong>
+                    <p>8×8 grid of probabilities<br>Highly sensitive to input<br>Chaotic, non-reversible</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-box">
+                    <strong>512-bit Hash</strong>
+                    <p>Matrix → integers → bits<br>Unique fingerprint<br>Quantum-resistant</p>
+                </div>
+            </div>
+            <p class="how-para">The security of QHF comes from the chaotic sensitivity of quantum walks to initial conditions. A single bit change in the payment data steers the quantum walker down a completely different path, producing a hash that differs in approximately 50% of its bits. This avalanche property, proven in the paper's sensitivity analysis, means collision attacks are computationally infeasible even for quantum computers.</p>
+        </div>
+
+        <div class="how-section mt-32">
+            <h2>📄 Research Foundation</h2>
+            <div class="research-box">
+                <p>This implementation is based on:</p>
+                <p class="research-cite">Abd El-Latif, A.A., Abd-El-Atty, B., Mehmood, I., Muhammad, K., Venegas-Andraca, S.E., &amp; Peng, J. (2021). Quantum-Inspired Blockchain-Based Cybersecurity: Securing Smart Edge Utilities in IoT-Based Smart Cities. Information Processing and Management, 58(3), 102549. <a href="https://doi.org/10.1016/j.ipm.2021.102549" target="_blank" rel="noopener">https://doi.org/10.1016/j.ipm.2021.102549</a></p>
+                <p>The Controlled Alternate Quantum Walk (CAQW) mathematics implemented in this project — including the coin operators, shift operators, evolution operators, and hash generation formula — are taken directly from Section 3 of the above paper.</p>
+                <p>This project extends the paper's blockchain application to real-time UPI payment integrity verification.</p>
+            </div>
+        </div>
+    </section>
+    <section id="tab-qhf" class="tab-content">
+        <div class="qb-section">
+            <h2>Quantum Hash Function (CAQW-Based)</h2>
+            <p class="qb-subtext">Based on Abd El-Latif et al., 2021 — Controlled Alternate Quantum Walks</p>
+            <input id="qhf-message" class="qb-input" type="text" 
+                   placeholder="Enter any message — e.g. UPI transfer ₹50,000 to HDFC a/c 9876">
+            <div class="mt-16">
+                <button class="btn btn-quantum" id="btn-qhf-generate">
+                    Generate Quantum Hash
+                </button>
+            </div>
+            <div class="qb-terminal" id="qhf-result"></div>
+            <div class="qb-label">
+                CAQW Probability Distribution (Walker Position)
+            </div>
+            <div class="qhf-heatmap" id="qhf-heatmap"></div>
+        </div>
+    
+        <div class="qb-divider"></div>
+    
+        <div class="qb-section">
+            <h2>Avalanche Effect Test</h2>
+            <p class="qb-subtext">
+                A 1-bit change in input should change ~50% of hash output
+            </p>
+            <input id="avalanche-message" class="qb-input" type="text" 
+                   value="UPI transfer Rs.50000 to HDFC">
+            <div class="mt-16">
+                <button class="btn btn-primary" id="btn-avalanche-run">
+                    Run Avalanche Test
+                </button>
+            </div>
+            <div class="qb-two-col" id="avalanche-boxes"></div>
+            <div class="qb-large-result" id="avalanche-metric"></div>
+            <div class="qb-progress-track">
+                <div class="qb-progress-fill" id="avalanche-progress"></div>
+            </div>
+            <div class="qb-status-text" id="avalanche-status"></div>
+        </div>
+    
+        <div class="qb-divider"></div>
+    
+        <div class="qb-section">
+            <h2>QHF vs SHA-256 — Avalanche Comparison</h2>
+            <p class="qb-subtext">
+                Both should change ~50% of bits on a 1-bit input flip.
+            </p>
+            <input id="compare-message" class="qb-input" type="text" 
+                   value="Aadhaar Verification Node-7">
+            <div class="mt-16">
+                <button class="btn btn-primary" id="btn-compare-run">
+                    Compare Hash Functions
+                </button>
+            </div>
+            <div class="qb-two-col" id="compare-cards"></div>
+            <div class="qb-interpret" id="compare-interpret"></div>
+        </div>
+    </section>
+</main>
+
+<script src="quantum_pay.js"></script>
+</body>
+</html>
