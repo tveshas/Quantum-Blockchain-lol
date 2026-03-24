@@ -8,8 +8,9 @@ function sleep(ms) {
 function showBackendError() {
     const el = document.getElementById("global-error");
     if (el) {
-        el.textContent =
-            "Backend error — is the server running on port 8000?";
+        el.innerHTML =
+            'Backend error — is the server running on port 8000?' +
+            '<br><span class="backend-hint">Render free tier can cold start in 30-60 seconds. Retry once.</span>';
         el.style.display = "block";
     }
 }
