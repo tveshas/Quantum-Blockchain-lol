@@ -2,6 +2,11 @@
 
 **A quantum-safe payment integrity system using Quantum Hash Functions based on Controlled Alternate Quantum Walks (CAQW), as described in Abd El-Latif et al., Information Processing and Management, 2021.**
 
+##Architecture
+
+<img width="868" height="790" alt="Screenshot 2026-03-25 at 23 13 40" src="https://github.com/user-attachments/assets/fc3fa1b9-e472-4e31-a9e5-d4f9eba0878f" />
+
+
 ## Prerequisites
 
 - Python 3.10+
